@@ -1,4 +1,4 @@
 #!/bin/bash
 sudo yum update -y
-sudo yum install -y java-17-openjdk-devel
+sudo yum -y install java-17-amazon-corretto
 
