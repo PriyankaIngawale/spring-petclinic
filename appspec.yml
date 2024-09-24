@@ -4,6 +4,8 @@ files:
   - source: /target/
     destination: /home/ec2-user
 hooks:
+  BeforeInstall:
+    - 'rm /opt/codedeploy-agent/deployment-root/deployment-logs/codedeploy-agent-deployments.log'
   AfterInstall:
     - location: scripts/install_dependencies.sh
       timeout: 300
