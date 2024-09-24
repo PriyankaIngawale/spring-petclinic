@@ -5,7 +5,8 @@ files:
     destination: /home/ec2-user
 hooks:
   BeforeInstall:
-    - 'sudo rm /opt/codedeploy-agent/deployment-root/deployment-logs/codedeploy-agent-deployments.log'
+    - 'rm -f /opt/codedeploy-agent/deployment-root/deployment-logs/codedeploy-agent-deployments.log'
+       runas: root
   AfterInstall:
     - location: scripts/install_dependencies.sh
       timeout: 300
