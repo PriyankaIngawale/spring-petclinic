@@ -1,3 +1,3 @@
 #!/bin/bash
-java -jar /home/ec2-user/spring-petclinic.jar > /dev/null 2>&1 &
+java -jar /home/ec2-user/spring-petclinic-3.2.0-SNAPSHOT.jar > /dev/null 2>&1 &
 
