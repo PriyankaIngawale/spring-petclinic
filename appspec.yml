@@ -1,7 +1,7 @@
 version: 0.0
 os: linux
 files:
-  - source: /target/spring-petclinic.jar
+  - source: /*.jar
     destination: /home/ec2-user
 hooks:
   AfterInstall:
