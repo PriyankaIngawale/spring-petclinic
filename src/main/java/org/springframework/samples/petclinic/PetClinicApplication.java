@@ -27,15 +27,13 @@ import java.util.Locale;
 /**
  * PetClinic Spring Boot Application.
  *
- * @author Dave Syer
+ * @author Dave Syer - pri
  *
  */
 @SpringBootApplication
 @ImportRuntimeHints(PetClinicRuntimeHints.class)
 public class PetClinicApplication {
-
-	public static void main(String[] args) {
+	public static void main(String[] args) {	
 		SpringApplication.run(PetClinicApplication.class, args);
 	}
-	
 }
