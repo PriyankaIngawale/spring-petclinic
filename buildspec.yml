@@ -8,6 +8,7 @@ phases:
   build:
     commands:
       - echo Build started on `date`
+      - mvn spring-javaformat:apply
       - mvn clean install -DskipTests 
   post_build:
     commands:
