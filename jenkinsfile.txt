@@ -1,0 +1,52 @@
+pipeline {
+    agent any
+
+    environment {
+        DOCKER_HUB_CREDENTIALS = credentials('docker-cred') // Docker Hub credentials
+        DOCKER_IMAGE = "khatpepriyanka/spring-petclinic:latest"
+    }
+
+    stages {
+        stage('Clone Repository') {
+            steps {
+                git 'https://github.com/PriyankaIngawale/spring-petclinic.git' // Replace with actual repo URL
+            }
+        }
+
+        stage('Build JAR') {
+            steps {
+                script {
+                    sh 'mvn clean package'
+                }
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    docker.build(DOCKER_IMAGE)
+                }
+            }
+        }
+
+        stage('Push Docker Image') {
+            steps {
+                script {
+                    docker.withRegistry('', 'DOCKER_HUB_CREDENTIALS') {
+                        docker.image(DOCKER_IMAGE).push()
+                    }
+                }
+            }
+        }
+     
+    }
+
+    post {
+        success {
+            echo 'Application deployed successfully!'
+        }
+        failure {
+            echo 'Deployment failed!'
+        }
+    }
+}
