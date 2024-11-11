@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    tools {
+        maven 'maven3'
+    }
 
     environment {
         DOCKER_HUB_CREDENTIALS = credentials('docker-cred') // Docker Hub credentials
@@ -32,7 +35,7 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
-                    docker.withRegistry('', 'DOCKER_HUB_CREDENTIALS') {
+                    docker.withRegistry('', 'docker-cred') {
                         docker.image(DOCKER_IMAGE).push()
                     }
                 }
