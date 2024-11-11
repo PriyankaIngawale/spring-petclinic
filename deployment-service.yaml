@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: petclinic
-        image: <your_dockerhub_username>/spring-petclinic:latest
+        image: khatpepriyanka/spring-petclinic:latest
         ports:
         - containerPort: 8080
 ---
