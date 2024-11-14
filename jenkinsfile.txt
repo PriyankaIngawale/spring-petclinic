@@ -6,7 +6,7 @@ pipeline {
 
     environment {
         DOCKER_HUB_CREDENTIALS = credentials('docker-cred') // Docker Hub credentials
-        DOCKER_IMAGE = "khatpepriyanka/spring-petclinic:latest"
+        DOCKER_IMAGE = "khatpepriyanka/spring-petclinic:${BUILD_NUMBER}"
     }
 
     stages {
