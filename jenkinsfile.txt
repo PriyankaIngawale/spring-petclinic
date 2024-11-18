@@ -3,16 +3,17 @@ pipeline {
     tools {
         maven 'maven3'
     }
-
     environment {
-        DOCKER_HUB_CREDENTIALS = credentials('docker-cred') // Docker Hub credentials
-        DOCKER_IMAGE = "khatpepriyanka/spring-petclinic:${BUILD_NUMBER}"
+        AWS_ACCESS_KEY_ID = credentials('access_key')
+        AWS_SECRET_ACCESS_KEY = credentials('secret_key')
+        DOCKER_HUB_CREDENTIALS = credentials('docker-cred')
+        DOCKER_IMAGE = "khatpepriyanka/spring-petclinic:latest"
     }
 
     stages {
         stage('Clone Repository') {
             steps {
-                git branch:'main', url:'https://github.com/PriyankaIngawale/spring-petclinic.git' // Replace with actual repo URL
+                git branch:'main', url:'https://github.com/PriyankaIngawale/spring-petclinic.git'
             }
         }
 
@@ -43,16 +44,16 @@ pipeline {
         }
         stage('Deploy to Kubernetes') {
             steps {
-                withKubeCredentials(kubeconfigId: 'k8s-token') {
-                    sh "kubectl apply -f deployment-service.yaml"
+                withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'k8s', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') {
+                sh "helm upgrade first --install mychart"
                 }
             }
         }
 
         stage('Verify Deployment') {
             steps {
-                withKubeCredentials(kubeconfigId: 'k8s-token') {
-                    sh "kubectl get all -n webapps"
+                withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'k8s', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') {
+                sh "kubectl get all"
                 }
             }
         }
